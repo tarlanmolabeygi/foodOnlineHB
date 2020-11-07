@@ -1,0 +1,11 @@
+Restaurant Name: Bonab
+Date/Time: 2020-10-05T12:03:42.125+03:30
+
+Customer Name: mohsen
+Customer Mobile: 09354810040
+--------------------------------------
+row: FoodName - FoodCount - FoodPrice - Price
+1: sabzi polo ba mahi - 1 - 40000 - 40000
+--------------------------------------
+Delivery Cost: 3000
+Total Price is: 43000

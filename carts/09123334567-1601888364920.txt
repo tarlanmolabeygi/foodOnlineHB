@@ -1,0 +1,11 @@
+Restaurant Name: Hani
+Date/Time: 2020-10-05T12:29:24.920+03:30
+
+Customer Name: mina
+Customer Mobile: 09123334567
+--------------------------------------
+row: FoodName - FoodCount - FoodPrice - Price
+1: Morghe sookhari - 1 - 40000 - 40000
+--------------------------------------
+Delivery Cost: 4000
+Total Price is: 44000

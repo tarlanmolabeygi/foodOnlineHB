@@ -1,0 +1,50 @@
+*** report for shopping average
+
+SELECT report.name, report.mobile, report.register_date, sum(report.food_price) as total_price FROM (
+SELECT u.name, u.mobile, u.register_date, (cf.count * f.price) as food_price  FROM food_online.users u JOIN food_online.cart c ON u.id = c.user_id 
+JOIN food_online.cart_food cf ON c.id = cf.cart_id
+JOIN food_online.food f ON cf.food_id = f.id
+) as report
+WHERE report.register_date > (UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 365 day)) * 1000)
+GROUP BY report.mobile;
+
+'mohsen', '09021212050', '1599331748000', '410000'
+'pariya', '09123334567', '1601888364920', '40000'
+'ali', '09354810040', '1601886822125', '80000'
+'zahra', '09389991111', '1601886908767', '380000'
+
+
+-----------------------------------
+
+*** report for most sell in restaurant
+SELECT report1.rname, report1.zone, report1.fname, sum(report1.sell_food) as sfood from (
+SELECT r.name as rname, r.zone, f.name as fname, (f.price * cf.count) as sell_food, c.timestamp
+FROM food_online.restaurant as r 
+JOIN food_online.food as f ON r.id = f.restaurant_id
+JOIN food_online.cart_food as cf ON f.id = cf.food_id
+JOIN food_online.cart as c ON c.id = cf.cart_id
+WHERE c.timestamp > (UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 365 day)) * 1000)
+) as report1
+GROUP BY report1.rname, report1.fname;
+
+'Bonab', '5', 'kabab makhsoos', '140000'
+'Bonab', '5', 'jooje makhsoos', '90000'
+'Bonab', '5', 'sabzi polo ba mahi', '40000'
+'Hani', '4', 'Jooje zaferani', '250000'
+'Hani', '4', 'Morghe sookhari', '240000'
+'Hani', '4', 'Kabab koobide', '150000'
+
+-----------------------------------
+
+*** report for delivery average in restaurant
+
+SELECT report.rname, report.zone, sum(report.delivery_cost) as total_delivery FROM
+(
+SELECT r.name as rname, r.zone, r.delivery_cost FROM food_online.restaurant as r JOIN food_online.cart as c ON r.id = c.restaurant_id
+WHERE c.timestamp > (UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 365 day)) * 1000)
+) as report
+GROUP BY rname
+
+'Bonab', '5', '6000'
+'Hani', '4', '1600000'
+
